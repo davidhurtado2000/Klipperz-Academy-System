@@ -1,0 +1,45 @@
+html{
+  background-color: #241f1f;
+}
+
+header{
+  padding-bottom: 50px;
+}
+
+footer {
+    background-color: white;
+}
+
+
+.form-group{
+  padding-top: 5px;
+}
+
+#iconos{
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+
+#formulario {
+  background-color: white;
+  border-radius: 30px;
+}
+
+#logo_bar{
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+
+div.btn{
+  cursor: pointer; 
+  transition: all 1s;  /* lets make it smooth */
+}
+
+div.change-bgcolor:hover, div.change-bgcolor:active{
+  background: rgb(114, 235, 49);
+  transition: all 1s;
+}
