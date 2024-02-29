@@ -230,6 +230,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                             <th scope="col">Pago 3</th>
                             <!--th scope="col">Pago Total</th-->
                             <th scope="col">Nota</th>
+                            <th scope="col">Tipo de Pago</th>
                             <th scope="col">Opcion</th>
                         </thead>
 
@@ -247,6 +248,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                             echo "<td>" . $filaClases["pago_boleta_3"] . "</td>";
                             //echo "<td>" . $filaClases["pagototal"] . "</td>";
                             echo "<td>" . $filaClases["nota"] . "</td>";
+                            echo "<td>" . $filaClases["tipopago"] . "</td>";
                             echo "<td> 
                         <input type='hidden' value='" . $filaClases["idclase"] . "' id='idclase' name='idclase'>
                         <input type='hidden' value='" . $_POST["valor_dni"] . "' id='valor_dni' name='valor_dni'>

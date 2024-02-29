@@ -66,20 +66,20 @@ class ControllerAlumnos{
         }
     }
 
-    public function ControllerActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta){
+    public function ControllerActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago ){
         try {
             $obj = new ModelAlumnos();
-            return $obj->_ModelActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta);
+            return $obj->_ModelActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago );
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function ControllerActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $boleta2, $pago2, $fecharegistro2, $idboleta2){
+    public function ControllerActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago, $boleta2, $pago2, $fecharegistro2, $idboleta2){
         try {
             $obj = new ModelAlumnos();
             return $obj->_ModelActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, 
-            $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, 
+            $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago ,
             $boleta2, $pago2, $fecharegistro2, $idboleta2);
         } catch (Exception $e) {
             throw $e;
@@ -87,13 +87,13 @@ class ControllerAlumnos{
     }
 
 
-    public function ControllerActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, 
+    public function ControllerActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago,
     $boleta2, $pago2, $fecharegistro2, $idboleta2,
     $boleta3, $pago3, $fecharegistro3, $idboleta3){
         try {
             $obj = new ModelAlumnos();
             return $obj->_ModelActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, 
-            $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, 
+            $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago,
             $boleta2, $pago2, $fecharegistro2, $idboleta2,
             $boleta3, $pago3, $fecharegistro3, $idboleta3);
         } catch (Exception $e) {
@@ -119,10 +119,10 @@ class ControllerAlumnos{
         }
     }
 
-    public function ControllerRegistarClase($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno){
+    public function ControllerRegistarClase($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno, $tipopago){
         try {
             $obj = new ModelAlumnos();
-            $obj->_ModelInsertarBoleta($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno);
+            $obj->_ModelInsertarBoleta($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno, $tipopago);
         } catch (Exception $e) {
             throw $e;
         }

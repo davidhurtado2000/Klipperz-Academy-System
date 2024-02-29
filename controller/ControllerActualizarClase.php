@@ -20,8 +20,9 @@ if (isset($_POST['submit'])) {
         $pago1 = $_POST["pago1"];
         $fecharegistro1 = $_POST["fecha1"];
         $nota = $_POST["nota"];
+        $tipopago = $_POST["tipopago"];
 
-        $obj->ControllerActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta);
+        $obj->ControllerActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago );
         header("Location:../view/VerClases.php");
     } elseif (!empty($_POST["boleta1"]) && !empty($_POST["boleta2"]) && empty($_POST["boleta3"])) {
         //Completar la parte del model para realizarlo
@@ -42,8 +43,9 @@ if (isset($_POST['submit'])) {
         $pago2 = $_POST["pago2"];
         $fecharegistro2 = $_POST["fecha2"];
         $nota = $_POST["nota"];
+        $tipopago = $_POST["tipopago"];
 
-        $obj->ControllerActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $boleta2, $pago2, $fecharegistro2, $idboleta2);
+        $obj->ControllerActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago, $boleta2, $pago2, $fecharegistro2, $idboleta2);
         header("Location:../view/VerClases.php");
     } elseif (!empty($_POST["boleta1"]) && !empty($_POST["boleta2"]) && !empty($_POST["boleta3"])) {
         //Completar la parte del model para realizarlo
@@ -68,8 +70,9 @@ if (isset($_POST['submit'])) {
         $pago3 = $_POST["pago3"];
         $fecharegistro3 = $_POST["fecha3"];
         $nota = $_POST["nota"];
+        $tipopago = $_POST["tipopago"];
 
-        $obj->ControllerActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, 
+        $obj->ControllerActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago,
         $boleta2, $pago2, $fecharegistro2, $idboleta2,
         $boleta3, $pago3, $fecharegistro3, $idboleta3);
         header("Location:../view/VerClases.php");

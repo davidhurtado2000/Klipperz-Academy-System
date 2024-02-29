@@ -12,6 +12,13 @@ class ControllerTurno{
         }
     }
 
-}
+    public function ControllerMostrarNombreTurno($idturno){
+        try {
+            $obj = new ModelTurno();
+            return $obj->_ModelMostrarNombreTurno($idturno);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
-?>
+}

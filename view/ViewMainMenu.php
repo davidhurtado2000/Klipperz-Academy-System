@@ -80,10 +80,19 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
             <div class="row">
                 <div class="col-lg-12">
 
+                    <?php if ($listarDatos[0]['prioridad'] == 1) { ?>
+                        <form action="ReportesGanancias.php">
+                            <input type="submit" class="btn btn-success" value="$ Ver Ganancias">
+                        </form>
+                    <?php } ?>
+                    <br>
+
                     <!--Esta parte del codigo es del boton para redireccion para registrar un nuevo alumno-->
                     <form action="RegistroAlumno.php">
                         <input type="submit" class="btn btn-primary" value="+ Registrar Nuevo Alumno">
                     </form>
+
+
 
                 </div>
             </div>

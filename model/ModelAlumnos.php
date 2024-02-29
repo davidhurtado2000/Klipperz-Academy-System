@@ -139,7 +139,8 @@ class ModelAlumnos
             boleta_1.pago1 AS pago_boleta_1,
             COALESCE(boleta_2.pago2, 0) AS pago_boleta_2,
             COALESCE(boleta_3.pago3, 0) AS pago_boleta_3,
-            pagototal 
+            pagototal,
+            tipopago
             FROM clase 
             INNER JOIN alumno ON clase.alumno_idalumno=alumno.idalumno
             INNER JOIN nivel ON clase.nivel_idnivel = nivel.idnivel
@@ -171,7 +172,8 @@ class ModelAlumnos
             pago1 AS pago_boleta_1, idboleta1, fechapago1, numboleta1,
             COALESCE(boleta_2.pago2, 0) AS pago_boleta_2, boleta_2.idboleta2, boleta_2.fechapago2,numboleta2,
             COALESCE(boleta_3.pago3, 0) AS pago_boleta_3, boleta_3.idboleta3, boleta_3.fechapago3,numboleta3,
-            pagototal 
+            pagototal,
+            tipopago
             FROM clase 
             INNER JOIN alumno ON clase.alumno_idalumno=alumno.idalumno
             INNER JOIN nivel ON clase.nivel_idnivel = nivel.idnivel
@@ -247,7 +249,7 @@ class ModelAlumnos
     }
     //----------------------------------------------------------------
 
-    public function _ModelActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta)
+    public function _ModelActualizarClase($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago)
     {
         $this->ModelActualizarBoleta($boleta1, $pago1, $fecharegistro1, $idboleta);
         try {
@@ -260,7 +262,8 @@ class ModelAlumnos
                 uniforme = '" . $uniforme . "',
                 estado = '" . $estado . "',
                 pagototal = '" . $pago1 . "',
-                nota = '" . $nota . "'
+                nota = '" . $nota . "',
+                tipopago = '" . $tipopago . "'
                 WHERE idclase = '" . $idclase . "'");
             echo $query->execute(); //Ejecuta la consulta SQL
 
@@ -269,7 +272,7 @@ class ModelAlumnos
             throw $e;
         }
     }
-    public function _ModelActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $boleta2, $pago2, $fecharegistro2, $idboleta2)
+    public function _ModelActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago , $boleta2, $pago2, $fecharegistro2, $idboleta2)
     {
         $this->ModelActualizarBoleta($boleta1, $pago1, $fecharegistro1, $idboleta);
         $this->ModelActualizarBoleta2($boleta2, $pago2, $fecharegistro2, $idboleta2);
@@ -283,7 +286,8 @@ class ModelAlumnos
                 uniforme = '" . $uniforme . "',
                 estado = '" . $estado . "',
                 pagototal = '" . $pago1+$pago2. "',
-                nota = '" . $nota . "'
+                nota = '" . $nota . "',
+                tipopago = '" . $tipopago . "'
                 WHERE idclase = '" . $idclase . "'");
             echo $query->execute(); //Ejecuta la consulta SQL
 
@@ -293,7 +297,7 @@ class ModelAlumnos
         }
     }
 
-    public function _ModelActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, 
+    public function _ModelActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago,
     $boleta2, $pago2, $fecharegistro2, $idboleta2,
     $boleta3, $pago3, $fecharegistro3, $idboleta3)
     {
@@ -310,7 +314,8 @@ class ModelAlumnos
                 uniforme = '" . $uniforme . "',
                 estado = '" . $estado . "',
                 pagototal = '" . $pago1+$pago2+$pago3 . "',
-                nota = '" . $nota . "'
+                nota = '" . $nota . "',
+                tipopago = '" . $tipopago . "'
                 WHERE idclase = '" . $idclase . "'");
             echo $query->execute(); //Ejecuta la consulta SQL
 
@@ -425,7 +430,7 @@ class ModelAlumnos
         }
     }
 
-    function _ModelRegistrarClase($fecha, $turno, $nivel, $uniforme, $estado, $pago1, $nota, $idboleta, $idadmin, $idalumno)
+    function _ModelRegistrarClase($fecha, $turno, $nivel, $uniforme, $estado, $pago1, $nota, $idboleta, $idadmin, $idalumno, $tipopago)
     {
         try {
             $null = null;
@@ -442,7 +447,8 @@ class ModelAlumnos
                 fechaRegistro,
                 uniforme,
                 estado,
-                nota
+                nota,
+                tipopago
             )
             VALUES(
                 :value1,
@@ -456,7 +462,8 @@ class ModelAlumnos
                 :value9,
                 :value10,
                 :value11,
-                :value12
+                :value12,
+                :value13
                 )");
             $updateQuery->bindParam(':value1', $pago1);
             $updateQuery->bindParam(':value2', $idadmin);
@@ -470,6 +477,7 @@ class ModelAlumnos
             $updateQuery->bindParam(':value10', $uniforme);
             $updateQuery->bindParam(':value11', $estado);
             $updateQuery->bindParam(':value12', $nota);
+            $updateQuery->bindParam(':value13', $tipopago);
             $updateQuery->execute();
             
             
@@ -479,7 +487,7 @@ class ModelAlumnos
     }
 
 
-    public function _ModelInsertarBoleta($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno){
+    public function _ModelInsertarBoleta($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno, $tipopago){
         try {
             $obj = Conexion::singleton();
             $query = $obj->prepare('INSERT INTO boleta_1 (numboleta1, pago1, fechapago1) VALUES (?,?,?)');
@@ -499,7 +507,7 @@ class ModelAlumnos
     
             $idboleta = substr($idboleta,  (strlen($idboleta)/2) - strlen($idboleta));
     
-            $this->_ModelRegistrarClase($fecha, $turno, $nivel, $uniforme, $estado, $pago1, $nota, $idboleta, $idadmin, $idalumno);
+            $this->_ModelRegistrarClase($fecha, $turno, $nivel, $uniforme, $estado, $pago1, $nota, $idboleta, $idadmin, $idalumno, $tipopago);
     
         } catch (Exception $e) {
             throw $e;

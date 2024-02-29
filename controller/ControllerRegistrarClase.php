@@ -21,8 +21,9 @@ if (isset($_POST['submit'])) {
         $pago1 = $_POST["pago1"];
         $fecharegistro1 = $_POST["fecha1"];
         $nota = $_POST["nota"];
+        $tipopago = $_POST["tipopago"];
 
-        $obj->ControllerRegistarClase($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno);
+        $obj->ControllerRegistarClase($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno, $tipopago);
         header("Location:../view/VerClases.php");
  
 

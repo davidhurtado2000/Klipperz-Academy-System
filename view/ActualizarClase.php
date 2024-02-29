@@ -197,7 +197,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                     </div>
 
                     <div class="col-lg-8 my-auto">
-                        <form action="VerClases.php" class="float-end" method="post" >
+                        <form action="VerClases.php" class="float-end" method="post">
                             <?php
                             echo "<input type='hidden' name='valor_dni' id='valor_dni' value='" . $_POST["valor_dni"] . "'>";
                             echo "<input type='hidden' name='idalumno' id='idalumno' value='" . $_POST["idalumno"] . "'>";
@@ -214,7 +214,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
             ?>
 
 
-            <form action="../controller/ControllerActualizarClase.php" method="post" class="w-50 mx-auto">
+            <form action="../controller/ControllerActualizarClase.php" method="post" class="w-50 mx-auto" id="actualizarClase">
 
                 <?php foreach ($listarClasesEspecifica as $filaDatos) { ?>
 
@@ -371,6 +371,21 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                         <img src="../img/imgRegistroAlumno/info.png" alt="Responsive image" id="imgRegis"><input type="text"
                             class="form-control border-0" id="nota" name="nota" value="<?php echo $filaDatos["nota"]; ?>"
                             required>
+                    </div>
+
+                    <div class="form-group border-bottom border-dark">
+                        <label for="tipopago">Tipo de Pago</label>
+                        <img src="../img/imgRegistroAlumno/info.png" alt="Responsive image" id="imgRegis">
+                        <select class="form-select" aria-label="Default select example" name="tipopago" id="tipopago"
+                            form="actualizarClase">
+                            <option style="display:none;" selected> <?php echo $filaDatos["tipopago"]?> </option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Yape">Yape</option>
+                            <option value="Plin">Plin</option>
+                            <option value="Cheque">Cheque</option>
+                        </select>
                     </div>
 
                 <?php } ?>
