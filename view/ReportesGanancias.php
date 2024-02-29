@@ -166,9 +166,14 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
             </div>
 
             <div class="row my-2">
-                <div class="col-lg-12 float-start">
+                <div class="col-lg-2 float-start" style="margin-right: -150px;">
                     <form action="ReportesTurno.php">
                         <input type="submit" class="btn btn-success" value="Ver Por Turno">
+                    </form>
+                </div>
+                <div class="col-lg-2 ">
+                    <form action="ViewMainMenu.php">
+                        <input type="submit" class="btn btn-danger" value="Regresar al Menu Principal">
                     </form>
                 </div>
             </div>
