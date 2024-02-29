@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 05:06 AM
+-- Generation Time: Feb 29, 2024 at 06:56 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -41,7 +41,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`idadmin`, `nombresa`, `apellidosa`, `prioridad`, `username`, `pass`) VALUES
-(1, 'Gustavo', 'Soberanes', 1, 'gustavo.soberanes', '123StayFresh');
+(1, 'Gustavo', 'Soberanes', 1, 'gustavo.soberanes', '123StayFresh'),
+(2, 'Dani', 'Cuyate', 2, 'Danicuyate', 'DaniCuya123');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ CREATE TABLE `boleta_1` (
 INSERT INTO `boleta_1` (`idboleta1`, `numboleta1`, `pago1`, `fechapago1`) VALUES
 (1, '342332', '300.00', '2023-12-12'),
 (5, '665881', '300.00', '2023-12-22'),
-(6, '444233', '400.00', '2023-12-11');
+(6, '444233', '400.00', '2023-12-11'),
+(8, '4433553', '300.00', '2022-12-12');
 
 -- --------------------------------------------------------
 
@@ -110,7 +112,7 @@ CREATE TABLE `boleta_2` (
 --
 
 INSERT INTO `boleta_2` (`idboleta2`, `numboleta2`, `pago2`, `fechapago2`) VALUES
-(26, '553333', '500.00', '2023-12-28'),
+(26, '553333', '500.00', '2023-11-08'),
 (28, '22554452', '50.00', '2024-01-18');
 
 -- --------------------------------------------------------
@@ -152,17 +154,19 @@ CREATE TABLE `clase` (
   `fechaRegistro` date NOT NULL,
   `uniforme` tinyint(1) NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `nota` varchar(1000) DEFAULT NULL
+  `nota` varchar(1000) DEFAULT NULL,
+  `tipopago` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clase`
 --
 
-INSERT INTO `clase` (`idclase`, `pagototal`, `admin_idadmin`, `nivel_idnivel`, `alumno_idalumno`, `boleta_1_idboleta`, `boleta_2_idboleta`, `boleta_3_idboleta`, `turno_idturno`, `fechaRegistro`, `uniforme`, `estado`, `nota`) VALUES
-(3, '1000.00', 1, 3, 1, 1, 26, 5, 4, '2024-01-12', 0, 1, 'DEBE 5'),
-(5, '350.00', 1, 1, 1, 5, 28, NULL, 1, '2023-12-22', 1, 1, 'Debe 100'),
-(6, '400.00', 1, 1, 4, 6, NULL, NULL, 3, '2023-12-11', 1, 1, 'Debe 100');
+INSERT INTO `clase` (`idclase`, `pagototal`, `admin_idadmin`, `nivel_idnivel`, `alumno_idalumno`, `boleta_1_idboleta`, `boleta_2_idboleta`, `boleta_3_idboleta`, `turno_idturno`, `fechaRegistro`, `uniforme`, `estado`, `nota`, `tipopago`) VALUES
+(3, '1000.00', 1, 3, 1, 1, 26, 5, 4, '2024-01-12', 0, 1, 'DEBE 5', NULL),
+(5, '350.00', 1, 1, 1, 5, 28, NULL, 1, '2023-12-22', 1, 1, 'Debe 100', NULL),
+(6, '400.00', 1, 1, 4, 6, NULL, NULL, 3, '2023-12-11', 1, 1, 'Debe 100', NULL),
+(8, '300.00', 1, 3, 4, 8, NULL, NULL, 3, '2022-12-12', 1, 1, 'N/A', 'Mastercard');
 
 -- --------------------------------------------------------
 
@@ -302,7 +306,7 @@ ALTER TABLE `turno`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `alumno`
@@ -314,7 +318,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT for table `boleta_1`
 --
 ALTER TABLE `boleta_1`
-  MODIFY `idboleta1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idboleta1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `boleta_2`
@@ -332,7 +336,7 @@ ALTER TABLE `boleta_3`
 -- AUTO_INCREMENT for table `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `idclase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idclase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `nivel`
