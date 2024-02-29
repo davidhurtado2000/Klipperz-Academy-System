@@ -223,7 +223,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                             type="text" class="form-control border-0" id="pago2" name="pago2" required>
                     </div>
                     <div class="form-group border-bottom border-dark">
-                        <label for="dni">Fecha de Registro</label>
+                        <label for="dni">Fecha de Registro de la Boleta 3</label>
                         <img src="../img/imgRegistroAlumno/info.png" alt="Responsive image" id="imgRegis" class="my-2"><input
                             type="date" class="form-control border-0" id="fch_registro" name="fch_registro" required>
                     </div>

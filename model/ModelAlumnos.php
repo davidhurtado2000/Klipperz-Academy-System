@@ -40,17 +40,18 @@ class ModelAlumnos
             $query->bindParam(6, $telefono);
             $query->bindParam(7, $descrip);
             $query->bindParam(8, $foto);
-            if ($query) {
-                $status = 'success';
-                $statusMsg = "File uploaded successfully.";
+            
+            $success = $query->execute(); // Execute the SQL query
+
+            if ($success) {
+                return ['status' => 'success', 'message' => 'File uploaded successfully.'];
             } else {
-                $statusMsg = "File upload failed, please try again.";
+                return ['status' => 'error', 'message' => 'File upload failed, please try again.'];
             }
-            echo $statusMsg, $status;
-            $query->execute(); //Ejecuta la consulta SQL
 
         } catch (PDOException $e) {
-            $e->getMessage();
+            // Log or handle the exception
+            return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
 
@@ -71,7 +72,7 @@ class ModelAlumnos
                     descrip = :descrip,
                     photo = FROM_BASE64(:foto)
                 WHERE idalumno = :idalumno");
-    
+
             $query->bindParam(':dni', $dni);
             $query->bindParam(':nombres', $nom_comp);
             $query->bindParam(':f_nacimiento', $fch_nacimiento);
@@ -81,7 +82,7 @@ class ModelAlumnos
             $query->bindParam(':descrip', $descrip);
             $query->bindParam(':foto', $foto);
             $query->bindParam(':idalumno', $idalumno);
-    
+
             echo $query->execute();
 
         } catch (PDOException $e) {
@@ -272,7 +273,7 @@ class ModelAlumnos
             throw $e;
         }
     }
-    public function _ModelActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago , $boleta2, $pago2, $fecharegistro2, $idboleta2)
+    public function _ModelActualizarClaseBoleta12($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago, $boleta2, $pago2, $fecharegistro2, $idboleta2)
     {
         $this->ModelActualizarBoleta($boleta1, $pago1, $fecharegistro1, $idboleta);
         $this->ModelActualizarBoleta2($boleta2, $pago2, $fecharegistro2, $idboleta2);
@@ -285,7 +286,7 @@ class ModelAlumnos
                 nivel_idnivel = '" . $nivel . "',
                 uniforme = '" . $uniforme . "',
                 estado = '" . $estado . "',
-                pagototal = '" . $pago1+$pago2. "',
+                pagototal = '" . $pago1 + $pago2 . "',
                 nota = '" . $nota . "',
                 tipopago = '" . $tipopago . "'
                 WHERE idclase = '" . $idclase . "'");
@@ -297,10 +298,28 @@ class ModelAlumnos
         }
     }
 
-    public function _ModelActualizarClaseBoleta123($idclase, $fecha, $turno, $nivel, $uniforme, $estado, $boleta1, $pago1, $fecharegistro1, $nota, $idboleta, $tipopago,
-    $boleta2, $pago2, $fecharegistro2, $idboleta2,
-    $boleta3, $pago3, $fecharegistro3, $idboleta3)
-    {
+    public function _ModelActualizarClaseBoleta123(
+        $idclase,
+        $fecha,
+        $turno,
+        $nivel,
+        $uniforme,
+        $estado,
+        $boleta1,
+        $pago1,
+        $fecharegistro1,
+        $nota,
+        $idboleta,
+        $tipopago,
+        $boleta2,
+        $pago2,
+        $fecharegistro2,
+        $idboleta2,
+        $boleta3,
+        $pago3,
+        $fecharegistro3,
+        $idboleta3
+    ) {
         $this->ModelActualizarBoleta($boleta1, $pago1, $fecharegistro1, $idboleta);
         $this->ModelActualizarBoleta2($boleta2, $pago2, $fecharegistro2, $idboleta2);
         $this->ModelActualizarBoleta3($boleta3, $pago3, $fecharegistro3, $idboleta3);
@@ -313,7 +332,7 @@ class ModelAlumnos
                 nivel_idnivel = '" . $nivel . "',
                 uniforme = '" . $uniforme . "',
                 estado = '" . $estado . "',
-                pagototal = '" . $pago1+$pago2+$pago3 . "',
+                pagototal = '" . $pago1 + $pago2 + $pago3 . "',
                 nota = '" . $nota . "',
                 tipopago = '" . $tipopago . "'
                 WHERE idclase = '" . $idclase . "'");
@@ -361,24 +380,24 @@ class ModelAlumnos
             $query->bindParam(3, $fecha);
             $query->execute();
             $query = null;
-    
+
             $obj = Conexion::singleton();
             $query = $obj->prepare('SELECT idboleta2 FROM boleta_2 WHERE numboleta2=?');
             $query->bindParam(1, $numboleta);
             $query->execute();
-    
+
             $vector = $query->fetch();
             $idboleta = implode("", $vector);
-    
-            $idboleta = substr($idboleta,  (strlen($idboleta)/2) - strlen($idboleta));
-    
+
+            $idboleta = substr($idboleta, (strlen($idboleta) / 2) - strlen($idboleta));
+
             $this->_ModelInsertarBoleta2Clase($idboleta, $idclase);
-    
+
         } catch (Exception $e) {
             throw $e;
         }
     }
-    
+
     //--Funciones para insertar y registrar boleta 3--
     function _ModelInsertarBoleta3Clase($idboleta, $idclase)
     {
@@ -394,7 +413,7 @@ class ModelAlumnos
                 echo "Update successful";
             } else {
                 echo "Update failed";
-                print_r($updateQuery->errorInfo()); 
+                print_r($updateQuery->errorInfo());
             }
 
         } catch (Exception $e) {
@@ -412,19 +431,19 @@ class ModelAlumnos
             $query->bindParam(3, $fecha);
             $query->execute();
             $query = null;
-    
+
             $obj = Conexion::singleton();
             $query = $obj->prepare('SELECT idboleta3 FROM boleta_3 WHERE numboleta3=?');
             $query->bindParam(1, $numboleta);
             $query->execute();
-    
+
             $vector = $query->fetch();
             $idboleta = implode("", $vector);
-    
-            $idboleta = substr($idboleta,  (strlen($idboleta)/2) - strlen($idboleta));
-    
+
+            $idboleta = substr($idboleta, (strlen($idboleta) / 2) - strlen($idboleta));
+
             $this->_ModelInsertarBoleta3Clase($idboleta, $idclase);
-    
+
         } catch (Exception $e) {
             throw $e;
         }
@@ -479,15 +498,16 @@ class ModelAlumnos
             $updateQuery->bindParam(':value12', $nota);
             $updateQuery->bindParam(':value13', $tipopago);
             $updateQuery->execute();
-            
-            
+
+
         } catch (Exception $e) {
             throw $e;
         }
     }
 
 
-    public function _ModelInsertarBoleta($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno, $tipopago){
+    public function _ModelInsertarBoleta($fecha, $turno, $nivel, $uniforme, $estado, $numboleta, $pago1, $fecharegistro1, $nota, $idadmin, $idalumno, $tipopago)
+    {
         try {
             $obj = Conexion::singleton();
             $query = $obj->prepare('INSERT INTO boleta_1 (numboleta1, pago1, fechapago1) VALUES (?,?,?)');
@@ -496,19 +516,19 @@ class ModelAlumnos
             $query->bindParam(3, $fecha);
             $query->execute();
             $query = null;
-    
+
             $obj = Conexion::singleton();
             $query = $obj->prepare('SELECT idboleta1 FROM boleta_1 WHERE numboleta1=?');
             $query->bindParam(1, $numboleta);
             $query->execute();
-    
+
             $vector = $query->fetch();
             $idboleta = implode("", $vector);
-    
-            $idboleta = substr($idboleta,  (strlen($idboleta)/2) - strlen($idboleta));
-    
+
+            $idboleta = substr($idboleta, (strlen($idboleta) / 2) - strlen($idboleta));
+
             $this->_ModelRegistrarClase($fecha, $turno, $nivel, $uniforme, $estado, $pago1, $nota, $idboleta, $idadmin, $idalumno, $tipopago);
-    
+
         } catch (Exception $e) {
             throw $e;
         }

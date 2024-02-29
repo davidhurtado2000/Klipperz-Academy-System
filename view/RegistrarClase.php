@@ -214,7 +214,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
             <form action="../controller/ControllerRegistrarClase.php" method="post" class="w-50 mx-auto" id="registroClase">
                 <div class="h4 text-center">Registro de Clase</div>
                 <div class="form-group border-bottom border-dark">
-                    <label for="dni">Fecha de Registro</label>
+                    <label for="dni">Fecha de Registro </label>
                     <img src="../img/imgRegistroAlumno/info.png" alt="Responsive image" id="imgRegis" class="my-2"><input
                         type="date" class="form-control border-0" id="fch_registro" name="fch_registro" required>
                 </div>
@@ -279,7 +279,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                         <input type="text" class="form-control border-0" id="pago1" name="pago1" required>
                     </div>
                     <div class="form-group border-bottom border-dark">
-                        <label for="distrito">Fecha de Registro</label>
+                        <label for="distrito">Fecha de Registro de la Boleta</label>
                         <input type="date" class="form-control border-0" id="fecha1" name="fecha1" required>
                     </div>
                     <input type="hidden" name="idboleta1" id="idboleta1" value="<?php echo $filaDatos["idboleta1"] ?>">
