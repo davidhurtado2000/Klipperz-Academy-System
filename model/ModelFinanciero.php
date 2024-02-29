@@ -106,7 +106,8 @@ class ModelFinanciero
             $obj = Conexion::singleton();
             $sql = "SELECT turno_idturno, nombret, nombresp FROM clase
             INNER JOIN turno ON clase.turno_idturno = turno.idturno
-            INNER JOIN profesor ON turno.profesor_idprof1=profesor.idprof";
+            INNER JOIN profesor ON turno.profesor_idprof1=profesor.idprof
+            GROUP BY turno_idturno";
             $query = $obj->prepare($sql);
             $query->execute();
             $vector = $query->fetchAll();
