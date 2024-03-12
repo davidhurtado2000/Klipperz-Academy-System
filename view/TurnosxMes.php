@@ -1,7 +1,4 @@
 <?php
-
-#NEED TO COMPLETE ISSET FOR THE TURNO VARIABLE AND THEN TRY TO MAKE 2 SELECTION BOXES TO CHOOSE WHICH YEAR AND WHAT TURN TO SEE
-
 session_start();
 if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
     header('Location:../Log-in.php?err=3');
@@ -13,55 +10,19 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
     $objDatos = new ControllerUsuario();
     $listarDatos = $objDatos->ControllerMostrarDatosUsuario($_SESSION["user"], $_SESSION["password-field"]);
 
-    include "../controller/ControllerFinanciero.php";
-    include "../controller/ControllerTurno.php";
-    if (isset($_POST["year"])) {
-        $year = $_POST["year"];
-        //$month = $_POST["month"];
-    } else {
-        $year = date('Y');
-    }
     if (isset($_POST["turno"])) {
         $turno = $_POST["turno"];
+        $mes = $_POST["mes"];
     } else {
-        $turno = 1;
+        $turno = "Vacio";
+        $mes = "Vacio";
     }
-    $objFinanciero = new ControllerFinanciero();
-    $listaDatosFinanciero = $objFinanciero->ControllerMostrarGananciasGeneralMes($year, $turno);
+
+    include "../controller/ControllerTurno.php";
 
     $objTurno = new ControllerTurno();
+    $listaTurno = $objTurno->ControllerMostrarAlumnoTurno($turno, $mes);
     $nombreTurno = $objTurno->ControllerMostrarNombreTurno($turno);
-
-    $spanishMonthNames = array(
-        '1' => 'Enero',
-        '2' => 'Febrero',
-        '3' => 'Marzo',
-        '4' => 'Abril',
-        '5' => 'Mayo',
-        '6' => 'Junio',
-        '7' => 'Julio',
-        '8' => 'Agosto',
-        '9' => 'Septiembre',
-        '10' => 'Octubre',
-        '11' => 'Noviembre',
-        '12' => 'Diciembre'
-    );
-
-
-    $dataPoints = array();
-
-    foreach ($listaDatosFinanciero as $filaFinanciero) {
-        //$temparray = array("x" => $filaFinanciero["Month"], "y" => $filaFinanciero["TotalPagos"]);
-        $fullMonthName = $spanishMonthNames[$filaFinanciero["Month"]];
-        $temparray = array("label" => $fullMonthName, "y" => ($filaFinanciero["TotalPagos"]));
-        array_push($dataPoints, $temparray);
-    }
-
-    $listaYear = $objFinanciero->ControllerGetYear();
-    $listTurno = $objFinanciero->ControllerGetTurno();
-
-
-
 
 
     ?>
@@ -70,57 +31,7 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
     <html lang="es">
 
     <head>
-        <script>
-            window.onload = function () {
-
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    exportEnabled: true,
-                    theme: "light1", // "light1", "light2", "dark1", "dark2"
-                    title: {
-                        text: "Reporte de Ganancias del Año ".concat("<?php echo $year;
-                        foreach ($nombreTurno as $filanomturno) {
-                            echo " del Turno " . $filanomturno["nombret"];
-                        } ?>"),
-                        fontSize: 30
-                    },
-                    axisY: {
-                        title: "Ingresos en Soles",
-                        titleFontSize: 20,
-                        labelFontSize: 14,
-                        tickLength: 0,
-                        includeZero: true
-                    },
-                    axisX: {
-                        title: "Meses",
-                        titleFontSize: 20,
-                        labelFontSize: 14,
-                        tickLength: 0,
-                        lineThickness: 0
-                    },
-                    data: [{
-                        type: "column",
-                        color: "blue",
-                        indexLabelFontColor: "#5A5757",
-                        indexLabelPlacement: "outside",
-                        dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-                    }]
-                });
-
-                // for (var i = 0; i < chart.options.data[0].dataPoints.length; i++) {
-                //     var dataPoint = chart.options.data[0].dataPoints[i];
-                //     dataPoint.label = dataPoint.y.toFixed(2); // Adjust to desired decimal places
-                //     dataPoint.indexLabelFontSize = 16;
-                //     dataPoint.indexLabelFontColor = "black";
-                //     dataPoint.indexLabelPlacement = "inside";
-                //     dataPoint.indexLabelBackgroundColor = "rgba(255, 255, 255, 0.7)";
-                // }
-
-                chart.render();
-
-            }
-        </script>
-        <title>Main Menu</title>
+        <title>Turno por Mes</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../css/login.css" type="text/css" rel="stylesheet" media="">
@@ -182,11 +93,6 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
             </div>
 
             <div class="row my-2">
-                <div class="col-lg-2 float-start" style="margin-right: -65px;">
-                    <form action="ReportesGanancias.php">
-                        <input type="submit" class="btn btn-success" value="Ver Por Ganancia General">
-                    </form>
-                </div>
                 <div class="col-lg-2 ">
                     <form action="ViewMainMenu.php">
                         <input type="submit" class="btn btn-danger" value="Regresar al Menu Principal">
@@ -195,18 +101,14 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
             </div>
 
             <div class="row my-2">
-                <div class="col-lg-12">
-                    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
-                    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-                </div>
-                <form action="ReportesTurno.php" method="POST">
+                <form action="TurnosxMes.php" method="POST">
                     <div class="row my-2">
                         <div class="col-lg-2">
                             <select class="form-select" id="turno" name="turno" required>
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <select class="form-select" id="year" name="year" required>
+                            <select class="form-select" id="mes" name="mes" required>
                             </select>
                         </div>
 
@@ -215,10 +117,44 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                         </div>
                     </div>
                 </form>
+
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-                <script type="text/javascript" src="../js/reporteturno.js"></script>
+                <script type="text/javascript" src="../js/turnomes.js"></script>
+
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-6 text-center">
+                        <h1 class="display-6"><?php foreach($nombreTurno as $filanomturno){
+                            echo "<strong> Turno: </strong>". $filanomturno["nombret"]. ", <strong> Periodo: </strong>".$mes; 
+                        }
+                        ?></h1>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <div class="table-responsive my-2">
+                        <table class="table table-bordered table-striped border border-dark">
+                            <thead style="background: grey">
+                                <th scope="col">Nombres de Alumnos</th>
+                                <th scope="col">DNI</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Nivel actual</th>
+                            </thead>
+
+                            <?php
+                            foreach ($listaTurno as $fila) {
+                                echo "<tr>";
+                                echo "<td>" . $fila["nombres"] . "</td>";
+                                echo "<td>" . $fila["dni"] . "</td>";
+                                echo "<td>" . $fila["telef"] . "</td>";
+                                echo "<td>" . $fila["nomnivel"] . "</td>";
+                                echo "</tr>";
+                            }
+
+                            ?>
+
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
 
         </div>
     </body>

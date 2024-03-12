@@ -21,4 +21,13 @@ class ControllerTurno{
         }
     }
 
+    public function ControllerMostrarAlumnoTurno($idturno, $fecha){
+        try {
+            $obj = new ModelTurno();
+            return $obj->_ModelMostrarAlumnosTurnos($idturno, $fecha);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
 }

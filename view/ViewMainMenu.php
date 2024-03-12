@@ -87,13 +87,19 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                     <?php } ?>
                     <br>
 
+
+                </div>
+                <div class="col-lg-2 float-start" style="margin-right: -50px;">
                     <!--Esta parte del codigo es del boton para redireccion para registrar un nuevo alumno-->
                     <form action="RegistroAlumno.php">
                         <input type="submit" class="btn btn-primary" value="+ Registrar Nuevo Alumno">
                     </form>
-
-
-
+                </div>
+                <div class="col-lg-2">
+                    <!--Esta parte del codigo es del boton para redireccion para registrar un nuevo alumno-->
+                    <form action="TurnosxMes.php">
+                        <input type="submit" class="btn btn" value="Ver Turnos">
+                    </form>
                 </div>
             </div>
 

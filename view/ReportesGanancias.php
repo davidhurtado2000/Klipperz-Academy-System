@@ -89,14 +89,14 @@ if ($_SESSION["user"] == "" && $_SESSION["password-field"] == "") {
                     }]
                 });
 
-                for (var i = 0; i < chart.options.data[0].dataPoints.length; i++) {
-                    var dataPoint = chart.options.data[0].dataPoints[i];
-                    dataPoint.label = dataPoint.y.toFixed(2); // Adjust to desired decimal places
-                    dataPoint.indexLabelFontSize = 16;
-                    dataPoint.indexLabelFontColor = "black";
-                    dataPoint.indexLabelPlacement = "inside";
-                    dataPoint.indexLabelBackgroundColor = "rgba(255, 255, 255, 0.7)";
-                }
+                // for (var i = 0; i < chart.options.data[0].dataPoints.length; i++) {
+                //     var dataPoint = chart.options.data[0].dataPoints[i];
+                //     dataPoint.label = dataPoint.y.toFixed(2); // Adjust to desired decimal places
+                //     dataPoint.indexLabelFontSize = 16;
+                //     dataPoint.indexLabelFontColor = "black";
+                //     dataPoint.indexLabelPlacement = "inside";
+                //     dataPoint.indexLabelBackgroundColor = "rgba(255, 255, 255, 0.7)";
+                // }
 
                 chart.render();
 
