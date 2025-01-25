@@ -2,10 +2,10 @@
 include_once '../model/ModelUsuario.php';
 
 class ControllerUsuario{
-    public function ControllerValidarUsuario($user, $pass){
+    public function ControllerValidarUsuario($user, $pass): array{
         try {
             $obj = new ModelUsuario();
-            return $obj->_ModelValidarUsuario($user, $pass);
+            return $obj->_ModelValidarUsuario(user: $user, pass: $pass);
         } catch (Exception $e) {
             throw $e;
         }

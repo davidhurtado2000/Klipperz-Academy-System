@@ -5,7 +5,7 @@ class Conexion {
     public function __construct()
     {
         try {
-            self::$instancia = new PDO('mysql:host=localhost;dbname=kacademy_db','root', '');
+            self::$instancia = new PDO('mysql:host=localhost;dbname=first_db','root', '');
             self::$instancia->exec("SET CHARACTER SET utf8");
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage();
@@ -21,4 +21,4 @@ class Conexion {
         }
         return self::$instancia;
     }
-}
+}   

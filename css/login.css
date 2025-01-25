@@ -1,45 +1,80 @@
-html{
-  background-color: #241f1f;
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+  background-color: #e9ebefef !important;
 }
 
-header{
-  padding-bottom: 50px;
+.container-fluid {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-footer {
-    background-color: white;
+.header,
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
 }
 
-
-.form-group{
-  padding-top: 5px;
+.header p,
+.footer p {
+  margin: 0;
+  text-align: center;
 }
 
-#iconos{
+.form-group {
+  padding-top: 10px;
+}
+
+#iconos {
   width: 30px;
   height: 30px;
   margin-bottom: 10px;
 }
 
 
-#formulario {
+#loginSubmit {
+  background-color: #737c89; /* Change as needed */
+  color: white;
+  border: 2px solid #737c89;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#loginSubmit:hover {
   background-color: white;
-  border-radius: 30px;
+  color: black;
+  border: 2px solid #737c89;
+  border-radius: 5px;
 }
 
-#logo_bar{
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
+#formulario {
+  opacity: 0;
+  transition: opacity 0.7s ease-in;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
 }
 
-
-div.btn{
-  cursor: pointer; 
-  transition: all 1s;  /* lets make it smooth */
+#formulario.show {
+  opacity: 1;
 }
 
-div.change-bgcolor:hover, div.change-bgcolor:active{
-  background: rgb(114, 235, 49);
-  transition: all 1s;
+@media (max-width: 768px) {
+  #formulario {
+    width: 90%;
+  }
 }

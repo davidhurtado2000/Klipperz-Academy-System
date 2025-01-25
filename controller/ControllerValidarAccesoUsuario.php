@@ -4,7 +4,7 @@ include 'ControllerUsuario.php';
 
 $pro = new ControllerUsuario();
 IF($_POST["user"] == "" || $_POST["password-field"] == ""){
-    header('Location:../Log-in.php?err=1');
+    header(header: 'Location:../Log-in.php?err=1');
 } else{
     $data = $pro->ControllerValidarUsuario($_POST["user"], $_POST["password-field"]);
     foreach($data as $fila){
